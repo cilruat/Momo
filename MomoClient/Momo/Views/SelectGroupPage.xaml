@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.SelectGroupPage"
+             xmlns:local="clr-namespace:Momo.ViewModels"
+             xmlns:model="clr-namespace:Momo.Models"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start" Padding="15">
+            <StackLayout Orientation="Horizontal" Spacing="20"
+                         VerticalOptions="CenterAndExpand">
+                <Image Source="Icon_close.png"
+                       HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="모임 선택"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="18"
+                    FontAttributes="Bold"/>
+            </StackLayout>
+
+            <BoxView HorizontalOptions="FillAndExpand"
+                Margin="-15,10,-15,-5"
+                HeightRequest="1"
+                Color="LightGray"/>
+
+            <RefreshView x:DataType="local:SelectGroupViewModel" Command="{Binding LoadGroupsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView x:Name="SelectGroupViewModel"
+                    ItemsSource="{Binding Groups}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="0,7.5">
+                                <StackLayout x:DataType="model:Group">
+                                    <StackLayout Orientation="Horizontal"
+                                                 VerticalOptions="CenterAndExpand"
+                                            Spacing="20">
+                                        <ffimageloading:CachedImage
+                                            HeightRequest="50"
+                                            WidthRequest="50"
+                                            Source="{Binding Image}"
+                                            ErrorPlaceholder="Splash.png" />
+                                        <Label Text="{Binding Name}"
+                                            VerticalTextAlignment="Center"
+                                            LineBreakMode="WordWrap"
+                                            Style="{DynamicResource ListItemTextStyle}" 
+                                            FontSize="15"/>
+                                        <Image Source="icon_arrow.png"
+                                            HorizontalOptions="EndAndExpand"
+                                            HeightRequest="12.5"
+                                            WidthRequest="12.5"
+                                            Opacity="0.5"/>
+                                    </StackLayout>
+                                    
+                                    <BoxView HorizontalOptions="FillAndExpand"
+                                        HeightRequest="0.25"
+                                        Color="LightGray"/>
+                                    
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            NumberOfTapsRequired="1"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:SelectGroupViewModel}}, Path=SelectGroup}"
+                                            CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Momo.Views.TapChatRoomsPage"
+             Title="ⓜⓞⓜⓞ"
+             xmlns:local="clr-namespace:Momo.ViewModels" 
+             xmlns:model="clr-namespace:Momo.Models"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             x:Name="BrowseItemsPage"
+             BackgroundColor="#f0f0f0">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="채팅방 만들기" Command="{Binding AddChatRoomCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout IsVisible="{Binding IsLoading}"
+                Margin="0,-62,0,-62"
+                BackgroundColor="White"
+                VerticalOptions="FillAndExpand">
+            </StackLayout>
+            <StackLayout IsVisible="{Binding IsEmptyList}"
+                Margin="0,-62,0,-62"
+                BackgroundColor="White"
+                VerticalOptions="FillAndExpand">
+                <Grid VerticalOptions="CenterAndExpand"
+                    RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0"
+                        Source="Icon_chat.png"
+                        WidthRequest="70"
+                        HeightRequest="70"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label Grid.Row="1"
+                        Margin="0,14,0,0"
+                        Text="채팅방 만들기"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="End"
+                        LineBreakMode="NoWrap"
+                        Style="{DynamicResource ListItemTextStyle}" 
+                        FontSize="20"
+                        TextColor="Black"
+                        FontAttributes="Bold"/>
+                    <StackLayout Grid.Row="3" Spacing="5">
+                        <Label Text="나의 모임 멤버와 채팅을 시작해보세요"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="End"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="15"/>
+                        <Label Text="내가 참여한 채팅방은 이곳에서 모아볼 수 있습니다"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="End"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="12"
+                            TextColor="{StaticResource GrayLabel}"/>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer
+                            Command="{Binding AddChatRoomCommand}"
+                            CommandParameter="">
+                    </TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+            <RefreshView Margin="0,0,0,-62"
+                x:DataType="local:TapChatRoomsViewModel"
+                Command="{Binding LoadRoomsCommand}"
+                IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+                IsVisible="{Binding IsRoomList}">
+                <CollectionView 
+                    x:Name="TapChatRoomsViewModel"
+                    ItemsSource="{Binding Rooms}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="0,0.5">
+                                <Frame Margin="-5,0"
+                                       Padding="15"
+                                       HasShadow="False">
+                                    <Grid x:DataType="model:ChatRoom"
+                                        RowSpacing="2.5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackLayout Grid.Column="1"
+                                            Grid.Row="1"
+                                            Grid.RowSpan="3">
+                                            <StackLayout IsVisible="{Binding Profile_1}"
+                                                HorizontalOptions="Center" 
+                                                VerticalOptions="Center">
+                                                <ffimageloading:CachedImage
+                                                    Source="{Binding Profile_Person_1}"
+                                                    HeightRequest="60"
+                                                    WidthRequest="60"
+                                                    ErrorPlaceholder="Icon_profile.png"
+                                                    LoadingPlaceholder="Icon_profile.png">
+                                                    <ffimageloading:CachedImage.Transformations>
+                                                        <fftransformations:CircleTransformation
+                                                            BorderSize="10"
+                                                            BorderHexColor="#ffffff"/>
+                                                    </ffimageloading:CachedImage.Transformations>
+                                                </ffimageloading:CachedImage>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding Profile_2}"
+                                                WidthRequest="60"
+                                                HorizontalOptions="Center" 
+                                                VerticalOptions="Center">
+                                                <ffimageloading:CachedImage
+                                                    Margin="-20,0,0,0"
+                                                    Source="{Binding Profile_Person_1}"
+                                                    HeightRequest="45"
+                                                    WidthRequest="45"
+                                                    ErrorPlaceholder="Icon_profile.png"
+                                                    LoadingPlaceholder="Icon_profile.png">
+                                                    <ffimageloading:CachedImage.Transformations>
+                                                        <fftransformations:CircleTransformation
+                                                            BorderSize="10"
+                                                            BorderHexColor="#ffffff"/>
+                                                    </ffimageloading:CachedImage.Transformations>
+                                                </ffimageloading:CachedImage>
+                                                <ffimageloading:CachedImage
+                                                    Margin="15,-35,0,0"
+                                                    Source="{Binding Profile_Person_2}"
+                                                    HeightRequest="45"
+                                                    WidthRequest="45"
+                                                    ErrorPlaceholder="Icon_profile.png"
+                                                    LoadingPlaceholder="Icon_profile.png">
+                                                    <ffimageloading:CachedImage.Transformations>
+                                                        <fftransformations:CircleTransformation
+                                                            BorderSize="10"
+                                                            BorderHexColor="#ffffff"/>
+                                                    </ffimageloading:CachedImage.Transformations>
+                                                </ffimageloading:CachedImage>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding Profile_3}"
+                                                WidthRequest="60"
+                                                HorizontalOptions="Center" 
+                                                VerticalOptions="Center">
+                                                <StackLayout Orientation="Horizontal"
+                                                    Margin="-4,25,0,0">
+                                                    <ffimageloading:CachedImage
+                                                        Margin="0,0,0,0"
+                                                        Source="{Binding Profile_Person_2}"
+                                                        HeightRequest="35"
+                                                        WidthRequest="35"
+                                                        ErrorPlaceholder="Icon_profile.png"
+                                                        LoadingPlaceholder="Icon_profile.png">
+                                                        <ffimageloading:CachedImage.Transformations>
+                                                            <fftransformations:CircleTransformation
+                                                                BorderSize="15"
+                                                                BorderHexColor="#ffffff"/>
+                                                        </ffimageloading:CachedImage.Transformations>
+                                                    </ffimageloading:CachedImage>
+                                                    <ffimageloading:CachedImage
+                                                        Margin="-10,0,0,0"
+                                                        Source="{Binding Profile_Person_3}"
+                                                        HeightRequest="35"
+                                                        WidthRequest="35"
+                                                        ErrorPlaceholder="Icon_profile.png"
+                                                        LoadingPlaceholder="Icon_profile.png">
+                                                        <ffimageloading:CachedImage.Transformations>
+                                                            <fftransformations:CircleTransformation
+                                                                BorderSize="15"
+                                                                BorderHexColor="#ffffff"/>
+                                                        </ffimageloading:CachedImage.Transformations>
+                                                    </ffimageloading:CachedImage>
+                                                </StackLayout>
+                                                <ffimageloading:CachedImage
+                                                    Margin="0,-65,0,0"
+                                                    Source="{Binding Profile_Person_1}"
+                                                    HeightRequest="35"
+                                                    WidthRequest="35"
+                                                    ErrorPlaceholder="Icon_profile.png"
+                                                    LoadingPlaceholder="Icon_profile.png">
+                                                    <ffimageloading:CachedImage.Transformations>
+                                                        <fftransformations:CircleTransformation
+                                                            BorderSize="15"
+                                                            BorderHexColor="#ffffff"/>
+                                                    </ffimageloading:CachedImage.Transformations>
+                                                </ffimageloading:CachedImage>
+                                            </StackLayout>
+                                            <StackLayout IsVisible="{Binding Profile_4}"
+                                                WidthRequest="60"
+                                                HorizontalOptions="Center" 
+                                                VerticalOptions="Center">
+                                                <StackLayout Orientation="Horizontal"
+                                                    Margin="-4,0,0,0">
+                                                    <ffimageloading:CachedImage
+                                                        Margin="0,0,0,0"
+                                                        Source="{Binding Profile_Person_1}"
+                                                        HeightRequest="35"
+                                                        WidthRequest="35"
+                                                        ErrorPlaceholder="Icon_profile.png"
+                                                        LoadingPlaceholder="Icon_profile.png">
+                                                        <ffimageloading:CachedImage.Transformations>
+                                                            <fftransformations:CircleTransformation
+                                                                BorderSize="20"
+                                                                BorderHexColor="#ffffff"/>
+                                                        </ffimageloading:CachedImage.Transformations>
+                                                    </ffimageloading:CachedImage>
+                                                    <ffimageloading:CachedImage
+                                                        Margin="-10,0,0,0"
+                                                        Source="{Binding Profile_Person_2}"
+                                                        HeightRequest="35"
+                                                        WidthRequest="35"
+                                                        ErrorPlaceholder="Icon_profile.png"
+                                                        LoadingPlaceholder="Icon_profile.png">
+                                                        <ffimageloading:CachedImage.Transformations>
+                                                            <fftransformations:CircleTransformation
+                                                                BorderSize="20"
+                                                                BorderHexColor="#ffffff"/>
+                                                        </ffimageloading:CachedImage.Transformations>
+                                                    </ffimageloading:CachedImage>
+                                                </StackLayout>
+                                                <StackLayout Orientation="Horizontal"
+                                                    Margin="-4,-11,0,0">
+                                                    <ffimageloading:CachedImage
+                                                        Margin="0,0,0,0"
+                                                        Source="{Binding Profile_Person_3}"
+                                                        HeightRequest="35"
+                                                        WidthRequest="35"
+                                                        ErrorPlaceholder="Icon_profile.png"
+                                                        LoadingPlaceholder="Icon_profile.png">
+                                                        <ffimageloading:CachedImage.Transformations>
+                                                            <fftransformations:CircleTransformation
+                                                                BorderSize="20"
+                                                                BorderHexColor="#ffffff"/>
+                                                        </ffimageloading:CachedImage.Transformations>
+                                                    </ffimageloading:CachedImage>
+                                                    <ffimageloading:CachedImage
+                                                        Margin="-10,0,0,0"
+                                                        Source="{Binding Profile_Person_4}"
+                                                        HeightRequest="35"
+                                                        WidthRequest="35"
+                                                        ErrorPlaceholder="Icon_profile.png"
+                                                        LoadingPlaceholder="Icon_profile.png">
+                                                        <ffimageloading:CachedImage.Transformations>
+                                                            <fftransformations:CircleTransformation
+                                                                BorderSize="20"
+                                                                BorderHexColor="#ffffff"/>
+                                                        </ffimageloading:CachedImage.Transformations>
+                                                    </ffimageloading:CachedImage>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </StackLayout>
+
+                                        <Label Text="{Binding ViewName}"
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemTextStyle}" 
+                                            FontSize="13"
+                                            FontAttributes="Bold"
+                                            Grid.Column="2"
+                                            Grid.Row="1"
+                                            Margin="20,-4,0,0"/>
+                                        <Label Text="{Binding LastChatMsg}"
+                                            Style="{DynamicResource ListItemTextStyle}"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2"
+                                            FontSize="13"
+                                            LineHeight="1.2"
+                                            Grid.Column="2"
+                                            Grid.Row="2"
+                                            Margin="20,0,0,0"/>
+                                        <StackLayout Orientation="Horizontal"
+                                            Spacing="10"
+                                            Grid.Column="2"
+                                            Grid.Row="3"
+                                            Margin="20,5,0,0">
+                                            <Label Text="{Binding GroupName}"
+                                                LineBreakMode="TailTruncation"
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="12"
+                                                TextColor="{StaticResource GrayLabel}"/>
+                                            <Label Text="{Binding LastTime}"
+                                                HorizontalOptions="EndAndExpand"
+                                                LineBreakMode="NoWrap"
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="12"
+                                                TextColor="{StaticResource GrayLabel}"/>
+                                        </StackLayout>
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                NumberOfTapsRequired="1"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:TapChatRoomsViewModel}}, Path=ChatRoomTapped}"
+                                                CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <sh:Shadows CornerRadius="30"
+                        Shades="{sh:SingleShade Offset='1,3', Opacity=0.8, Color=Gray, BlurRadius=3}">
+                <Image HorizontalOptions="EndAndExpand"
+                    VerticalOptions="EndAndExpand"
+                    Source="Icon_add.png"
+                    HeightRequest="50"
+                    TranslationX="-15"
+                    TranslationY="-10">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding AddChatRoomCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </sh:Shadows>
+
+            <BoxView HorizontalOptions="FillAndExpand"
+                HeightRequest="1"
+                Color="LightGray"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

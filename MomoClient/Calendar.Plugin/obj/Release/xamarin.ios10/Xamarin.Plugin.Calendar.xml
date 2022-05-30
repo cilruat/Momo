@@ -1,0 +1,374 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Xamarin.Plugin.Calendar</name>
+    </assembly>
+    <members>
+        <member name="T:Xamarin.Plugin.Calendar.Controls.Calendar">
+            <summary>
+            Calendar plugin for Xamarin.Forms
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.DisableSwipeDetectionProperty">
+            <summary> Bindable property for DisableSwipeDetection </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.DisableSwipeDetection">
+            <summary>
+            <para> Disables the swipe detection (needs testing on iOS) </para>
+            Could be useful if your superview has its own swipe-detection logic.
+            Also see if <seealso cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeUpCommand"/>, <seealso cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeUpToHideEnabled"/>, <seealso cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeLeftCommand"/>, <seealso cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeRightCommand"/> or <seealso cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeToChangeMonthEnabled"/> is useful to you.
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeUpCommandProperty">
+            <summary> Bindable property for SwipeUpCommand </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeUpCommand">
+            <summary> Activated when user swipes-up over days view </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeUpToHideEnabledProperty">
+            <summary> Bindable property for SwipeUpToHideEnabled </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeUpToHideEnabled">
+            <summary> Enable/disable default swipe-up action for showing/hiding calendar </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeLeftCommandProperty">
+            <summary> Bindable property for SwipeLeftCommand </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeLeftCommand">
+            <summary> Activated when user swipes-left over days view </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeRightCommandProperty">
+            <summary> Bindable property for SwipeRightCommand </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeRightCommand">
+            <summary> Activated when user swipes-right over days view </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeToChangeMonthEnabledProperty">
+            <summary> Bindable property for SwipeToChangeMonthEnabled </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.SwipeToChangeMonthEnabled">
+            <summary> Enable/disable default swipe actions for changing months </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.DayTappedCommandProperty">
+            <summary>
+            Bindable property for DayTapped
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.DayTappedCommand">
+            <summary>
+            Action to run after a day has been tapped.
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.MinimumDateProperty">
+            <summary> Bindable property for MinimumDate </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.MinimumDate">
+            <summary> Minimum date which can be selected </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.MaximumDateProperty">
+            <summary> Bindable property for MaximumDate </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.MaximumDate">
+            <summary> Maximum date which can be selected </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.Calendar.DisabledDayColorProperty">
+            <summary> Bindable property for DisabledDayColor </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.DisabledDayColor">
+            <summary> Color for days which are out of MinimumDate - MaximumDate range </summary>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Controls.Calendar.#ctor">
+            <summary>
+            Calendar plugin for Xamarin.Forms
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.PrevMonthCommand">
+            <summary>
+            When executed calendar moves to previous month.
+            Read only command to use in your <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.HeaderSectionTemplate"/> or <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.FooterSectionTemplate"/>
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.NextMonthCommand">
+            <summary>
+            When executed calendar moves to next month.
+            Read only command to use in your <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.HeaderSectionTemplate"/> or <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.FooterSectionTemplate"/>
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.PrevYearCommand">
+            <summary>
+            When executed calendar moves to previous year.
+            Read only command to use in your <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.HeaderSectionTemplate"/> or <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.FooterSectionTemplate"/>
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.NextYearCommand">
+            <summary>
+            When executed calendar moves to next year.
+            Read only command to use in your <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.HeaderSectionTemplate"/> or <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.FooterSectionTemplate"/>
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.Calendar.ShowHideCalendarCommand">
+            <summary>
+            When executed shows/hides the calendar's current month days view.
+            Read only command to use in your <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.HeaderSectionTemplate"/> or <see cref="P:Xamarin.Plugin.Calendar.Controls.Calendar.FooterSectionTemplate"/>
+            </summary>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Controls.Calendar.OnPropertyChanged(System.String)">
+            <summary> Method that is called when a bound property is changed. </summary>
+            <param name="propertyName">The name of the bound property that changed.</param>
+        </member>
+        <member name="T:Xamarin.Plugin.Calendar.Controls.DayView">
+            <summary>
+            Internal class used by Xamarin.Plugin.Calendar
+            </summary>
+        </member>
+        <member name="T:Xamarin.Plugin.Calendar.Controls.DefaultFooterSection">
+            <summary>
+            Internal class used by Xamarin.Plugin.Calendar
+            </summary>
+        </member>
+        <member name="T:Xamarin.Plugin.Calendar.Controls.DefaultHeaderSection">
+            <summary>
+            Internal class used by Xamarin.Plugin.Calendar
+            </summary>
+        </member>
+        <member name="T:Xamarin.Plugin.Calendar.Controls.MonthDaysView">
+            <summary>
+            Internal class used by Xamarin.Plugin.Calendar
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.SelectedDateProperty">
+            <summary> Bindable property for SelectedDate </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.CultureProperty">
+            <summary> Bindable property for Culture </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.EventsProperty">
+            <summary> Bindable property for Events </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DaysTitleColorProperty">
+            <summary> Bindable property for DaysTitleColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.SelectedDayTextColorProperty">
+            <summary> Bindable property for SelectedDayTextColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DeselectedDayTextColorProperty">
+            <summary> Bindable property for DeselectedDayTextColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.OtherMonthDayColorProperty">
+            <summary> Bindable property for OtherMonthDayColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.OtherMonthDayIsVisibleProperty">
+            <summary> Bindable property for OtherMonthDayIsVisible </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.SelectedDayBackgroundColorProperty">
+            <summary> Bindable property for SelectedDayBackgroundColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.EventIndicatorTypeProperty">
+            <summary> Bindable property for EventIndicatorColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.EventIndicatorColorProperty">
+            <summary> Bindable property for EventIndicatorColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.EventIndicatorSelectedColorProperty">
+            <summary> Bindable property for EventIndicatorSelectedColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.EventIndicatorTextColorProperty">
+            <summary> Bindable property for EventIndicatorTextColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.EventIndicatorSelectedTextColorProperty">
+            <summary> Bindable property for EventIndicatorSelectedTextColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.TodayOutlineColorProperty">
+            <summary> Bindable property for TodayOutlineColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.TodayFillColorProperty">
+            <summary> Bindable property for TodayFillColor </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DayViewSizeProperty">
+            <summary> Bindable property for DayViewSize </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DayViewCornerRadiusProperty">
+            <summary> Bindable property for DayViewCornerRadius </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DaysTitleHeightProperty">
+            <summary> Bindable property for DaysTitleHeight </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DaysTitleMaximumLengthProperty">
+            <summary> Bindable property for DaysTitleMaximumLength </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DaysLabelStyleProperty">
+            <summary> Bindable property for DaysLabelStyle </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DaysTitleLabelStyleProperty">
+            <summary> Bindable property for DaysTitleLabelStyle </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DayTappedCommandProperty">
+            <summary>
+            Bindable property for DayTapped
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DayTappedCommand">
+            <summary>
+            Action to run after a day has been tapped.
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.MinimumDateProperty">
+            <summary> Bindable property for MinimumDate </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.MonthDaysView.MinimumDate">
+            <summary> Minimum date which can be selected </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.MaximumDateProperty">
+            <summary> Bindable property for MaximumDate </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.MonthDaysView.MaximumDate">
+            <summary> Maximum date which can be selected </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DisabledDayColorProperty">
+            <summary> Bindable property for DisabledDayColor </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Controls.MonthDaysView.DisabledDayColor">
+            <summary> Color for days which are out of MinimumDate - MaximumDate range </summary>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Controls.MonthDaysView.Finalize">
+            <summary> ??? </summary>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Controls.MonthDaysView.OnPropertyChanged(System.String)">
+            <summary> Method that is called when a bound property is changed. </summary>
+            <param name="propertyName">The name of the bound property that changed.</param>
+        </member>
+        <member name="T:Xamarin.Plugin.Calendar.DaysTitleMaxLength">
+            <summary>
+            Set day title maximum length in calendar
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.DaysTitleMaxLength.OneChar">
+            <summary>
+            Day title maximum length of one character. 
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.DaysTitleMaxLength.TwoChars">
+            <summary>
+            Day title maximum length of two characters.
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.DaysTitleMaxLength.ThreeChars">
+            <summary>
+            Day title maximum length of three characters.
+            </summary>
+        </member>
+        <member name="T:Xamarin.Plugin.Calendar.EventIndicatorType">
+            <summary>
+            Set type of event indicator on calendar
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.EventIndicatorType.BottomDot">
+            <summary>
+            Set event indicator as dot bellow of date in calendar
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.EventIndicatorType.TopDot">
+            <summary>
+            Set event indicator as dot on top of date in calendar
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.EventIndicatorType.Background">
+            <summary>
+            Set event indicator as colored background in calendar
+            </summary>
+        </member>
+        <member name="F:Xamarin.Plugin.Calendar.EventIndicatorType.BackgroundFull">
+            <summary>
+            Set event indicator as larger size colored background in calendar
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Interfaces.IPersonalizableDayEvent.EventIndicatorColor">
+            <summary>
+            Color to use as indicator when there are events on the day
+            if the EventIndicatorColor is null then the general EventIndicatorColor of the Calendar will be used
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Interfaces.IPersonalizableDayEvent.EventIndicatorSelectedColor">
+            <summary>
+            Color to use as indicator when the day is selected and there are events on the day, if this is null then the EventIndicatorColor is used,
+            if the EventIndicatorColor is null then the general EventIndicatorSelectedColor of the Calendar will be used
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Interfaces.IPersonalizableDayEvent.EventIndicatorTextColor">
+            <summary>
+            Color for text to use as indicator when there are events on the day
+            if the EventIndicatorTextColor is null then the general EventIndicatorTextColor of the Calendar will be used
+            </summary>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Interfaces.IPersonalizableDayEvent.EventIndicatorSelectedTextColor">
+            <summary>
+            Color for text to use as indicator when the day is selected and there are events on the day, if this is null then the EventIndicatorTextColor is used,
+            if the EventIndicatorSelectedTextColor is null then the general EventIndicatorSelectedTextColor of the Calendar will be used
+            </summary>
+        </member>
+        <member name="T:Xamarin.Plugin.Calendar.Models.EventCollection">
+            <summary> 
+            Calendar events collection, wraps <see cref="T:System.Collections.Generic.Dictionary`2" />
+            </summary>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Models.EventCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Xamarin.Plugin.Calendar.Models.EventCollection"/> class
+            that is empty, has the default initial capacity, and uses the default equality
+            comparer for the key type.
+            </summary>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Models.EventCollection.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Xamarin.Plugin.Calendar.Models.EventCollection"/> class
+            that is empty, has the specified initial capacity, and uses the default equality
+            comparer for the key type.
+            </summary>
+            <param name="capacity">
+            The initial number of elements that the <see cref="T:Xamarin.Plugin.Calendar.Models.EventCollection"/> can contain.
+            </param>
+            <exception cref="T:System.ArgumentOutOfRangeException">capacity is less than 0.</exception>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Models.EventCollection.Remove(System.DateTime)">
+            <summary>
+            Removes a collection of values for specific date
+            </summary>
+            <param name="key">Event DateTime</param>
+            <returns>true if the element is successfully found and removed; otherwise, false. This method returns false if key is not found in the System.Collections.Generic.Dictionary`2.</returns>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Models.EventCollection.Add(System.DateTime,System.Collections.ICollection)">
+            <summary>
+            Add collection of values for specific date
+            </summary>
+            <param name="key">Event DateTime</param>
+            <param name="value">Collection of events for date</param>
+        </member>
+        <member name="P:Xamarin.Plugin.Calendar.Models.EventCollection.Item(System.DateTime)">
+            <summary>
+            Gets/sets collection of values for specific date
+            </summary>
+            <param name="key">Event DateTime</param>
+            <returns>Collection of events for date</returns>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Models.EventCollection.ContainsKey(System.DateTime)">
+            <summary>
+            Checks if dictionary already has collection for specific date
+            </summary>
+            <param name="key">Key DateTime</param>
+            <returns>true if dictionary already has the date as key; otherwise, false</returns>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Models.EventCollection.TryGetValue(System.DateTime,System.Collections.ICollection@)">
+            <summary>
+            Gets the value associated with the specific date
+            </summary>
+            <param name="key">The date for the value to get</param>
+            <param name="value">If the date exists then this is the associated collection; otherwise, it will be the default value of ICollection</param>
+            <returns>true if dictionary contains an element with the specified date; otherwise false</returns>
+        </member>
+        <member name="M:Xamarin.Plugin.Calendar.Models.EventCollection.Clear">
+            <summary>
+            Removes all dates and collections
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.NewGroupAddPersonPage"
+             xmlns:local="clr-namespace:Momo.ViewModels" 
+             xmlns:model="clr-namespace:Momo.Models"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start" Padding="15" >
+            <StackLayout Orientation="Horizontal">
+                <Image Source="Icon_close.png"
+                    HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <StackLayout>
+                    <Label Margin="15,0"
+                           Text="연락처로 추가"
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="15"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                    HorizontalOptions="EndAndExpand">
+                    <Frame Padding="7.5,0"
+                        HeightRequest="10"
+                        BackgroundColor="{StaticResource Orange}"
+                        CornerRadius="12.5"
+                        IsVisible="{Binding IsSelected}">
+                        <Label Text="{Binding SelectCount}"
+                            VerticalTextAlignment="Center"
+                            FontSize="12"
+                            TextColor="White"/>
+                    </Frame>
+                    <Label Text="완료"
+                        TextColor="{StaticResource Orange}"
+                        Style="{DynamicResource ListItemTextStyle}"
+                        FontSize="15"/>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ConfirmCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+            </StackLayout>
+
+            <BoxView Margin="-15,5,-15,0"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="1"
+                Color="LightGray"/>
+
+            <StackLayout>
+                <Frame Margin="0,5"
+                    Padding="4"
+                    CornerRadius="5"
+                    BorderColor="Transparent"
+                    BackgroundColor="#f0f0f0">
+                    <SearchBar x:Name="search"
+                        Margin="-10,-5,15,-5"
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="검색"
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        Text="{Binding SearchText}"
+                        TextChanged="search_TextChanged">
+                    </SearchBar>
+                </Frame>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"
+                Margin="0,10,0,0"
+                Spacing="10"
+                Padding="2.5,5">
+                <Image Source="{Binding AllSelectIconName}"
+                    Margin="5,0,0,0"
+                    HeightRequest="20"/>
+                <Label Margin="0,2.5"
+                    Text="모두 선택"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="14">
+                </Label>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding AllSelectCommand}">
+                    </TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+            <BoxView HorizontalOptions="FillAndExpand"
+                HeightRequest="1"
+                Color="LightGray"/>
+
+            <RefreshView 
+                x:DataType="local:NewGroupAddPersonViewModel"
+                Command="{Binding LoadPersonsCommand}"
+                IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView x:Name="NewGroupAddPersonViewModel"
+                    ItemsSource="{Binding Persons}"
+                    SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                         Span="2"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="1.5">
+                                <Frame CornerRadius="5" Padding="7.5">
+                                    <StackLayout Orientation="Horizontal"
+                                            HeightRequest="40"
+                                            Spacing="10"
+                                            x:DataType="model:SelectableItemPerson">
+                                        <Image Source="{Binding ChangeImage}"
+                                            Margin="5,0,0,0"
+                                            HeightRequest="20"/>
+
+                                        <StackLayout Orientation="Vertical">
+                                            <Label Margin="5,2.5"
+                                                Text="{Binding Person.PersonName}"
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14"
+                                                FontAttributes="Bold"/>
+                                            <Label Margin="5,-8"
+                                                Text="{Binding Person.PhoneNum}"
+                                                Style="{DynamicResource ListItemTextStyle}"                                       
+                                                FontSize="12"/>
+                                        </StackLayout>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                NumberOfTapsRequired="1"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:NewGroupAddPersonViewModel}}, Path=PersonSelect}"
+                                                CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

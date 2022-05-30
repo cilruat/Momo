@@ -1,0 +1,17 @@
+C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Release\netstandard2.0\Xamarin.Plugin.Calendar.deps.json
+C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Release\netstandard2.0\Xamarin.Plugin.Calendar.dll
+C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Release\netstandard2.0\Xamarin.Plugin.Calendar.pdb
+C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Release\netstandard2.0\Xamarin.Plugin.Calendar.xml
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\CalendarPlugin.csprojAssemblyReference.cache
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\Shared\Controls\Calendar.xaml.g.cs
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\Shared\Controls\DayView.xaml.g.cs
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\Shared\Controls\DefaultFooterSection.xaml.g.cs
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\Shared\Controls\DefaultHeaderSection.xaml.g.cs
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\Shared\Controls\MonthDaysView.xaml.g.cs
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\CalendarPlugin.AssemblyInfoInputs.cache
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\CalendarPlugin.AssemblyInfo.cs
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\CalendarPlugin.csproj.CoreCompileInputs.cache
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\XamlC.stamp
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\Xamarin.Plugin.Calendar.dll
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\Xamarin.Plugin.Calendar.xml
+C:\Proejct_Momo\Momo\Calendar.Plugin\obj\Release\netstandard2.0\Xamarin.Plugin.Calendar.pdb

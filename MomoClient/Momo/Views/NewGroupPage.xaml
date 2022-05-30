@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Momo.Controls;assembly=Momo"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.NewGroupPage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="FillAndExpand"
+                     Padding="15">
+
+            <StackLayout Orientation="Horizontal">
+                <Image Source="Icon_back.png"
+                       HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Margin="10,0,0,0"
+                    Text="밴드 설정"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    IsVisible="{Binding IsUpdate}"/>
+                <Label HorizontalOptions="EndAndExpand"                    
+                    Text="완료"
+                    TextColor="{StaticResource Orange}"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="15">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ConfirmCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+            <StackLayout 
+                VerticalOptions="CenterAndExpand" 
+                Margin="0,-50,0,0"
+                Spacing="20">
+                <controls:StandardEntry
+                    HorizontalOptions="Center"
+                    WidthRequest="340"
+                    Padding="0"
+                    BorderColor="Transparent"
+                    HeightRequest="40"
+                    Text="{Binding GroupName}"
+                    TextColor="Black"
+                    HorizontalTextAlignment="Center"
+                    Placeholder="모임 이름 입력"
+                    PlaceholderColor="LightGray"
+                    CursorPosition="0"
+                    MaxLength="30"
+                    FontSize="24"/>
+
+                <Frame HorizontalOptions="Center"
+                    BorderColor="Transparent"
+                    BackgroundColor="{Binding FrameBackColor}"
+                    CornerRadius="20"
+                    HeightRequest="140"
+                    WidthRequest="200"
+                    Padding="0">
+                    <ffimageloading:CachedImage
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Aspect="AspectFill"
+                        x:Name="GroupImage"
+                        ErrorPlaceholder="BasicGroupCover1.png"
+                        LoadingPlaceholder="BasicGroupCover1.png">
+                    </ffimageloading:CachedImage>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SelectImage}">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </Frame>
+                
+                <Image Margin="185,-47.5,0,0"
+                    Source="Icon_camera.png"
+                    Opacity="0.5"
+                    WidthRequest="40"
+                    HeightRequest="40"/>
+
+                <Frame HorizontalOptions="Center"
+                    Margin="0,10,0,0"
+                    Padding="0"
+                    WidthRequest="200"
+                    HeightRequest="35"
+                    CornerRadius="5"
+                    BorderColor="#fafafa"
+                    IsVisible="{Binding IsNew}">
+                    
+                    <StackLayout Orientation="Horizontal"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand">
+                        <Label Text="연락처로 멤버 추가 및 수정"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            TextColor="{StaticResource GrayLabel}"
+                            FontSize="12"/>
+                        <Label Text="＋"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            TextColor="{StaticResource GrayLabel}"
+                            FontSize="12"/>
+                    </StackLayout>
+                    
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SelectPersons}">
+                        </TapGestureRecognizer>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <StackLayout Margin="0,50,0,0"
+                    HorizontalOptions="FillAndExpand">
+                    <Label HorizontalOptions="Center"
+                        Text="모임 공개 타입"
+                        TextColor="{StaticResource GrayLabel}"
+                        FontSize="13"/>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 Spacing="30">
+                        <StackLayout Orientation="Horizontal" Spacing="0">
+                            <CheckBox x:Name="CheckPrivate"
+                                IsChecked="True"
+                                Color="Orange"
+                                CheckedChanged="CheckPrivate_CheckedChanged"/>
+                            <Label Text="비공개"
+                                TextColor="{StaticResource GrayLabel}"
+                                FontSize="12"
+                                VerticalTextAlignment="Center"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding PrivateCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal" Spacing="0">
+                            <CheckBox x:Name="CheckPublic"
+                                Color="Orange"
+                                CheckedChanged="CheckPublic_CheckedChanged"/>
+                            <Label Text="공개"
+                                TextColor="{StaticResource GrayLabel}"
+                                FontSize="12"
+                                VerticalTextAlignment="Center"/>
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding PublicCommand}">
+                                </TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout 
+                HorizontalOptions="Fill"
+                VerticalOptions="End">
+                <Label Margin="0,10"
+                    Text="모임 이름 및 사진 변경, 멤버 추가는 추후에도 진행할 수 있습니다"
+                    HorizontalTextAlignment="Center"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    TextColor="{StaticResource GrayLabel}"
+                    FontSize="12"
+                    IsVisible="{Binding IsNew}"/>
+
+                <Button VerticalOptions="EndAndExpand"
+                    Text="완료"
+                    CornerRadius="5"
+                    Command="{Binding ConfirmCommand}"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

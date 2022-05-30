@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.MyWriteTabsPage"
+             Title="ⓜⓞⓜⓞ"
+             xmlns:view="clr-namespace:Momo.Views" 
+             xmlns:local="clr-namespace:Momo.ViewModels" 
+             xmlns:model="clr-namespace:Momo.Models"
+             xmlns:tabs="clr-namespace:Sharpnado.Tabs;assembly=Sharpnado.Tabs"
+             x:Name="BrowseItemsPage"
+             BackgroundColor="#f0f0f0">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TabStyle" TargetType="tabs:UnderlinedTabItem">
+                <Setter Property="SelectedTabColor" Value="#ff962e"/>
+                <Setter Property="UnselectedLabelColor" Value="Gray"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout
+                Orientation="Horizontal" Padding="15"
+                BackgroundColor="White">
+                <Image Source="Icon_back.png"
+                        HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Margin="15,0"
+                    Text="내가 쓴 글"
+                    FontAttributes="Bold"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="18"/>
+            </StackLayout>
+
+            <tabs:TabHostView
+                Padding="0,1"
+                Margin="0,-8"
+                HeightRequest="50"
+                BackgroundColor="White"
+                SelectedIndex="{Binding Source={x:Reference Switcher}, Path=SelectedIndex, Mode=TwoWay}">
+                <tabs:TabHostView.Tabs>
+                    <tabs:UnderlinedTabItem Style="{StaticResource TabStyle}" Label="게시글"/>
+                    <tabs:UnderlinedTabItem Style="{StaticResource TabStyle}" Label="댓글"/>                    
+                </tabs:TabHostView.Tabs>
+            </tabs:TabHostView>
+
+            <BoxView HorizontalOptions="FillAndExpand"
+                HeightRequest="1"
+                Color="LightGray"/>
+
+            <tabs:ViewSwitcher
+                x:Name="Switcher"                    
+                SelectedIndex="{Binding SelectedViewModelIndex}">
+                <tabs:LazyView x:TypeArguments="view:MyNoticesPage" BindingContext="{Binding MyNoticesViewModel}"/>
+                <tabs:LazyView x:TypeArguments="view:MyCommentsPage" BindingContext="{Binding MyCommentsViewModel}"/>
+            </tabs:ViewSwitcher>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

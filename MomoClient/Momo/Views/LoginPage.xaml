@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:Momo.Controls;assembly=Momo"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.LoginPage"
+             Title="로그인">
+    <ContentPage.Content>
+        <Grid Margin="16" VerticalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0">
+                <controls:StandardEntry
+                    BorderColor="Black"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    HeightRequest="45"
+                    x:Name="UserPhoneEntry"
+                    Text="{Binding UserPhone}"                    
+                    Placeholder="휴대폰 번호"
+                    Keyboard="Numeric"
+                    MaxLength="11"
+                    FontSize="16"/>
+                <controls:StandardEntry
+                    BorderColor="Black"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    HeightRequest="45"
+                    x:Name="UserNameEntry"
+                    Text="{Binding UserName}"
+                    Placeholder="이름"
+                    FontSize="16"/>
+                <Label Text="일치하는 정보가 없습니다" 
+                       IsVisible="{Binding AreCredentialsInvalid}" 
+                       TextColor="Red" />
+            </StackLayout>
+            <Button Grid.Row="6"
+                    Grid.RowSpan="8"
+                    Text="확인"
+                    FontSize="15"
+                    Command="{Binding AuthenticateCommand}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

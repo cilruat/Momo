@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.TapGroupsPage"
+             IconImageSource="Icon_Picture.png"
+             Title="ⓜⓞⓜⓞ"
+             xmlns:local="clr-namespace:Momo.ViewModels" 
+             xmlns:model="clr-namespace:Momo.Models"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:sh="clr-namespace:Sharpnado.Shades;assembly=Sharpnado.Shadows"
+             xmlns:memory="clr-namespace:Momo.Views"
+             x:Name="BrowseItemsPage"
+             BackgroundColor="White">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="모임 만들기" Command="{Binding AddGroupCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <!--<memory:MemoryViewPage/>-->
+            
+            <StackLayout IsVisible="{Binding IsLoading}"
+                Margin="0,-62,0,-62"
+                BackgroundColor="White"
+                VerticalOptions="FillAndExpand">
+            </StackLayout>
+
+            <StackLayout IsVisible="{Binding IsEmptyList}"
+                Margin="0,-62,0,-62"
+                BackgroundColor="White"
+                VerticalOptions="FillAndExpand">
+                <Grid VerticalOptions="CenterAndExpand"
+                    RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0"
+                        Source="Icon_add_group.png"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        VerticalOptions="CenterAndExpand"/>
+                    <Label Grid.Row="1"
+                        Margin="0,-15,0,0"
+                        Text="모임 만들기"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="End"
+                        LineBreakMode="NoWrap"
+                        Style="{DynamicResource ListItemTextStyle}" 
+                        FontSize="20"
+                        TextColor="Black"
+                        FontAttributes="Bold"/>
+                    <StackLayout Grid.Row="3" Spacing="5">
+                        <Label Text="원하는 모임을 지금 만들어보세요"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="End"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="15"/>
+                        <Label Text="내가 포함된 모든 모임이 여기에 표시됩니다"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="End"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="12"
+                            TextColor="{StaticResource GrayLabel}"/>
+                    </StackLayout>
+                </Grid>
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer
+                            Command="{Binding AddGroupCommand}"
+                            CommandParameter="">
+                    </TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+            <RefreshView Padding="5,0"
+                Margin="3,3,3,-62"
+                x:DataType="local:TapGroupsViewModel" 
+                Command="{Binding LoadGroupsCommand}" 
+                IsRefreshing="{Binding IsBusy}"
+                IsVisible="{Binding IsGroupList}">
+                <CollectionView x:Name="TapGroupsViewModel"
+                    ItemsSource="{Binding Groups}"
+                    SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="10,15">
+                                <StackLayout x:DataType="model:Group">
+                                    <sh:Shadows CornerRadius="5"
+                                        Shades="{sh:SingleShade Offset='4,4', Opacity=0.65, Color=Gray, BlurRadius=3}">
+                                        <Frame Padding="0"
+                                            CornerRadius="5" 
+                                            VerticalOptions="Start"
+                                            HeightRequest="140">
+                                            <ffimageloading:CachedImage
+                                                VerticalOptions="FillAndExpand"
+                                                HorizontalOptions="FillAndExpand"
+                                                Aspect="AspectFill"
+                                                Source="{Binding Image}"
+                                                ErrorPlaceholder="Splash.png"
+                                                LoadingPlaceholder="WhiteBackground.png"/>
+                                        </Frame>
+                                    </sh:Shadows>
+
+                                    <StackLayout Padding="0,5,0,0">
+                                        <Label Text="{Binding Name}"
+                                            Style="{DynamicResource ListItemTextStyle}" 
+                                            FontSize="13"/>
+                                    </StackLayout>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            NumberOfTapsRequired="1"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:TapGroupsViewModel}}, Path=GroupTapped}"
+                                            CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <sh:Shadows CornerRadius="30"
+                Shades="{sh:SingleShade Offset='1,3', Opacity=0.8, Color=Gray, BlurRadius=3}">
+                <Image HorizontalOptions="EndAndExpand"
+                    VerticalOptions="EndAndExpand"
+                    Source="Icon_add.png"
+                    HeightRequest="50"
+                    TranslationX="-15"
+                    TranslationY="-10">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding AddGroupCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </sh:Shadows>
+
+            <BoxView HorizontalOptions="FillAndExpand"
+                HeightRequest="1"
+                Color="LightGray"/>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

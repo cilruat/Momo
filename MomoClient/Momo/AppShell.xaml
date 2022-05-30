@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:Momo.Views"
+       Title="Momo"
+       x:Class="Momo.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
+
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="Black" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="Gray"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="Black"/>
+            </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}"/>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <ShellContent Route="SplashPage" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:SplashPage}" />
+    <ShellContent Route="LoginCheckPage" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:LoginCheckPage}" />
+    <ShellContent Route="LoginPage" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:LoginPage}" Style="{StaticResource BaseStyle}"/>
+    <ShellContent Route="JoinPage" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:JoinPage}" />
+    <ShellContent Route="WriteMyInfoPage" Shell.FlyoutBehavior="Disabled" ContentTemplate="{DataTemplate local:WriteMyInfoPage}" />
+
+    <TabBar>
+        <ShellContent Title="모임" Icon="tab_home.png" Route="TapGroupsPage" ContentTemplate="{DataTemplate local:TapGroupsPage}" />
+        <ShellContent Title="새글" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:TapNoticesPage}" />
+        <ShellContent Title="채팅" Icon="tab_chat.png" ContentTemplate="{DataTemplate local:TapChatRoomsPage}" />
+        <ShellContent Title="설정" Icon="tab_setting.png" ContentTemplate="{DataTemplate local:TapSettingsPage}" />
+    </TabBar>
+</Shell>

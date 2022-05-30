@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.NewSchedulePage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Padding="15">
+            <StackLayout Orientation="Horizontal" Spacing="20">
+                <Image Source="Icon_back.png"
+                       HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="일정 만들기"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="18"
+                    FontAttributes="Bold"/>
+                <Label HorizontalOptions="EndAndExpand"
+                    VerticalOptions="Center"
+                    Text="완료"
+                    TextColor="{StaticResource Orange}"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="15">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ConfirmCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            
+            <BoxView HorizontalOptions="FillAndExpand"
+                Margin="-15,10,-15,-5"
+                HeightRequest="1"
+                Color="#eeeeee"/>
+
+            <StackLayout 
+                Margin="5,10,5,5"
+                VerticalOptions="StartAndExpand">
+                <Editor Margin="-5"
+                    HeightRequest="55"
+                    MaxLength="20"
+                    Text="{Binding Name}"
+                    TextColor="Black"
+                    Placeholder="일정 제목 (최대 20자)"
+                    PlaceholderColor="Gray"
+                    FontSize="15"/>
+
+                <Editor Margin="-5"
+                    HeightRequest="100"
+                    MaxLength="100"
+                    Text="{Binding Desc}"
+                    TextColor="Black"
+                    Placeholder="일정 내용 (최대 100자)"
+                    PlaceholderColor="Gray"
+                    FontSize="15"/>
+
+                <Grid Margin="0,20,0,30"
+                    HorizontalOptions="Start"
+                    ColumnSpacing="20"
+                    RowSpacing="10"
+                    >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Source="Icon_clock.png"
+                        Grid.Column="0"
+                        Grid.Row="0"/>
+
+                    <Grid
+                        Grid.Column="1"
+                        Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label x:Name="StartDate"
+                            Grid.Column="0"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="Center"
+                            Text="시작일"
+                            TextColor="Gray"
+                            FontSize="15">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding StartDatePickCommand}"
+                                    CommandParameter="true">
+                                </TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <TimePicker
+                            Grid.Column="1"
+                            HorizontalOptions="EndAndExpand"
+                            Time="{Binding SelectStartTime}"                                    
+                            TextColor="{Binding StartTimeColor}"
+                            FontSize="15"/>
+                    </Grid>
+
+                    <Grid
+                        Grid.Column="1"
+                        Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="30*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="EndDate"
+                            Grid.Column="0"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            VerticalTextAlignment="Center"
+                            Text="종료일 (옵션)"
+                            TextColor="Gray"
+                            FontSize="15">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding EndDatePickCommand}"
+                                    CommandParameter="false">
+                                </TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+
+                        <TimePicker
+                            Grid.Column="1"
+                            HorizontalOptions="EndAndExpand"
+                            Time="{Binding SelectEndTime}"
+                            TextColor="{Binding EndTimeColor}"
+                            FontSize="15"/>
+                    </Grid>
+                </Grid>
+
+                <BoxView HorizontalOptions="FillAndExpand"
+                    Margin="-5,0"
+                    HeightRequest="1"
+                    Color="#eeeeee"/>
+                
+                <Grid Margin="0,30"
+                    HorizontalOptions="Start"
+                    ColumnSpacing="20"
+                    RowSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Source="Icon_palette.png"
+                        Grid.Column="0"
+                        Grid.Row="0"/>
+
+                    <Label Text="일정 색상"
+                        FontSize="15"
+                        Grid.Column="1"
+                        Grid.Row="0"/>
+
+                    <StackLayout x:Name="ColorList"
+                        Orientation="Horizontal"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Spacing="20">
+                    </StackLayout>
+                </Grid>
+
+                <BoxView HorizontalOptions="FillAndExpand"
+                    Margin="-5,0"
+                    HeightRequest="1"
+                    Color="#eeeeee"/>
+
+                <Grid Margin="0,30"
+                    HorizontalOptions="Start"
+                    ColumnSpacing="20"
+                    RowSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Source="Icon_share.png"
+                        IsVisible="{Binding ShowPush}"
+                        Grid.Column="0"
+                        Grid.Row="0"/>
+
+                    <StackLayout IsVisible="{Binding ShowPush}"
+                        Margin="0,0,-10,0"
+                        Grid.Column="1"
+                        Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalOptions="FillAndExpand">
+                        <Label 
+                            Text="일정 생성시 알림 보내기"
+                            FontSize="15"/>
+                        <Switch IsToggled="{Binding TogglePush}"
+                            OnColor="#fec58d"
+                            HorizontalOptions="EndAndExpand">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="On">
+                                        <VisualState.Setters>
+                                            <Setter Property="ThumbColor"
+                                                    Value="{StaticResource Orange}"/>
+                                            <Setter Property="Margin"
+                                                    Value="0,0,5,0"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Off">
+                                        <VisualState.Setters>
+                                            <Setter Property="ThumbColor"
+                                                    Value="LightGray"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Switch>
+                    </StackLayout>
+
+                    <Image Source="Icon_alarm.png"
+                        Grid.Column="0"
+                        Grid.Row="1"/>
+                    
+                    <StackLayout 
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalOptions="FillAndExpand">
+                        <Label 
+                            Text="미리 알림"
+                            FontSize="15"/>
+                        <Label HorizontalOptions="EndAndExpand"
+                            Text="{Binding AlarmDesc}"
+                            FontSize="15"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding SelectAlarmCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </Grid>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

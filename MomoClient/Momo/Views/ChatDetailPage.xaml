@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.ChatDetailPage"
+             xmlns:local="clr-namespace:Momo.ViewModels" 
+             xmlns:model="clr-namespace:Momo.Models"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:controls="clr-namespace:Momo.Controls;assembly=Momo"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start" Padding="15">
+            <StackLayout Orientation="Horizontal">
+                <Image Margin="0,-2.5,0,0"
+                    Source="Icon_close.png"
+                    HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <StackLayout Margin="15,0" Spacing="0">
+                    <Label Text="{Binding RoomName}"
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="14"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding GroupName}"
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="12"/>
+                </StackLayout>
+                <Label HorizontalOptions="EndAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="보내기"
+                    TextColor="{StaticResource Orange}"
+                    Style="{DynamicResource ListItemTextStyle}"
+                    FontSize="14">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SendChatCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+            <BoxView Margin="-15,5,-15,0"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="1"
+                Color="LightGray"/>
+
+            <RefreshView Margin="-7.5, 0" x:DataType="local:ChatDetailViewModel" Command="{Binding LoadChatsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView
+                    ItemsUpdatingScrollMode="KeepLastItemInView"
+                    ItemsSource="{Binding Chats}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5"
+                                x:DataType="model:Chat">
+                                <StackLayout Orientation="Horizontal"
+                                    HorizontalOptions="StartAndExpand"
+                                    VerticalOptions="StartAndExpand"
+                                    IsVisible="{Binding OtherChat}">
+                                    
+                                    <ffimageloading:CachedImage
+                                        VerticalOptions="StartAndExpand"
+                                        Source="{Binding PersonImage}"
+                                        HeightRequest="36"
+                                        WidthRequest="36"
+                                        ErrorPlaceholder="Icon_profile.png"
+                                        LoadingPlaceholder="Icon_profile.png">
+                                        <ffimageloading:CachedImage.Transformations>
+                                            <fftransformations:CircleTransformation/>
+                                        </ffimageloading:CachedImage.Transformations>
+                                    </ffimageloading:CachedImage>
+
+                                    <StackLayout>
+                                        <Label HorizontalTextAlignment="Start"
+                                            Text="{Binding PersonName}"
+                                            Style="{DynamicResource ListItemTextStyle}" 
+                                            FontSize="12"/>
+                                        <Frame CornerRadius="5"
+                                           Padding="7.5,5">
+                                            <StackLayout Orientation="Vertical">
+                                                <Label HorizontalTextAlignment="Start"
+                                                    Text="{Binding Msg}"
+                                                    Style="{DynamicResource ListItemTextStyle}"
+                                                    LineHeight="1.1"
+                                                    FontSize="13"/>
+                                                <Label HorizontalTextAlignment="End"
+                                                    Text="{Binding Time}"
+                                                    Style="{DynamicResource ListItemTextStyle}" 
+                                                    FontSize="12"/>
+                                            </StackLayout>
+                                        </Frame>
+                                    </StackLayout>
+                                    
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="EndAndExpand"
+                                    IsVisible="{Binding MyChat}">
+                                    <Frame CornerRadius="5"
+                                           Padding="7.5,5"
+                                           BackgroundColor="PowderBlue">
+                                        <StackLayout Orientation="Vertical">
+                                            <Label HorizontalTextAlignment="Start"
+                                                Text="{Binding Msg}"
+                                                Style="{DynamicResource ListItemTextStyle}"
+                                                LineHeight="1.1"
+                                                FontSize="14"/>
+                                            <Label HorizontalTextAlignment="End"
+                                                Text="{Binding Time}"
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="12"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+            <StackLayout Margin="0,0,0,10">
+                <BoxView Margin="-15,-5,-15,0"
+                    HorizontalOptions="FillAndExpand"
+                    HeightRequest="1"
+                    Color="LightGray"/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <controls:StandardEntry
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        Padding="10,0,0,0"
+                        BackgroundColor="#f0f0f0"
+                        CornerRadius="10"
+                        Text="{Binding Msg}"                    
+                        Placeholder="메시지 입력"
+                        FontSize="14"/>
+                    <Button Grid.Column="4"
+                        Text="보내기"
+                        FontSize="12"
+                        CornerRadius="10"
+                        Command="{Binding SendChatCommand}" />
+                </Grid>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rg:PopupPage
+    x:Class="Momo.Views.CalendarPickerPopup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:local="clr-namespace:Momo.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+    xmlns:controls="clr-namespace:Momo.Controls"
+    xmlns:rg="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    CloseWhenBackgroundIsClicked="True"
+    mc:Ignorable="d">
+
+    <!--<rg:PopupPage.BindingContext>
+        <local:CalendarPickerPopupViewModel />
+    </rg:PopupPage.BindingContext>-->
+
+    <rg:PopupPage.Content>
+        <Frame
+            BackgroundColor="White"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <StackLayout
+                IsClippedToBounds="True"
+                Orientation="Vertical"
+                Spacing="3">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Large"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="날짜 선택"
+                    TextColor="#2196f3"
+                    VerticalOptions="Center" />
+                <plugin:Calendar
+                    Culture="{Binding Culture}"
+                    Padding="10,0"
+                    FooterSectionVisible="False"
+                    HorizontalOptions="Center"
+                    MaximumDate="{Binding MaximumDate}"
+                    MinimumDate="{Binding MinimumDate}"
+                    MonthYear="{Binding MonthYear}"
+                    SelectedDate="{Binding SelectedDate}"
+                    TodayFillColor="LightGray"
+                    TodayOutlineColor="LightGray"
+                    VerticalOptions="Center"
+                    WidthRequest="320"
+                    DaysTitleColor="#2196f3"
+                    DaysTitleMaximumLength="OneChar">
+                    <plugin:Calendar.HeaderSectionTemplate>
+                        <controls:CalendarHeader />
+                    </plugin:Calendar.HeaderSectionTemplate>
+                </plugin:Calendar>
+
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    Orientation="Horizontal"
+                    Spacing="15"
+                    VerticalOptions="Center"
+                    HeightRequest="34">
+                    <Button
+                        Padding="0"
+                        Command="{Binding CancelCommand}"
+                        HorizontalOptions="EndAndExpand"
+                        Text="취소"
+                        BackgroundColor="LightGray"/>
+                    <Button
+                        Padding="0"
+                        Command="{Binding SuccessCommand}"
+                        Text="설정"
+                        BackgroundColor="#2196f3"/>
+                </StackLayout>
+            </StackLayout>
+
+        </Frame>
+    </rg:PopupPage.Content>
+</rg:PopupPage>

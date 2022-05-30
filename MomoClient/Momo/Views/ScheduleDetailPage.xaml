@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.ScheduleDetailPage"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Padding="15">
+            <StackLayout Orientation="Horizontal" Spacing="20">
+                <Image Source="Icon_close.png"
+                       HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Text="일정 내용"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="18"
+                    FontAttributes="Bold"/>
+                <Image HorizontalOptions="EndAndExpand"
+                    IsVisible="{Binding ShowOption}"
+                    HeightRequest="27.5"
+                    Source="Icon_option_black.png">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding OptionCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+            
+            <BoxView HorizontalOptions="FillAndExpand"
+                Margin="-15,10,-15,-5"
+                HeightRequest="1"
+                Color="#eeeeee"/>
+
+            <StackLayout 
+                Margin="5,10,5,5"
+                VerticalOptions="StartAndExpand">
+                <Label Text="{Binding Name}"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="17"
+                    FontAttributes="Bold"/>
+
+                <StackLayout Spacing="-2.5">
+                    <Label Text="{Binding TimeDesc1}"
+                        Style="{DynamicResource ListItemTextStyle}" 
+                        TextColor="Gray"
+                        FontSize="12"/>
+
+                    <Label Text="{Binding TimeDesc2}"
+                        Style="{DynamicResource ListItemTextStyle}" 
+                        TextColor="Gray"
+                        FontSize="12"/>
+                </StackLayout>
+
+                <BoxView HorizontalOptions="FillAndExpand"
+                    Margin="0,10"
+                    HeightRequest="1"
+                    Color="#eeeeee"/>
+
+                <Label Text="{Binding Desc}"
+                    Style="{DynamicResource ListItemTextStyle}"
+                    LineHeight="1.1"
+                    FontSize="15"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.PersonDetailPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Margin="15,5,0,0"
+                   HorizontalOptions="Start"
+                   Source="Icon_close.png"
+                   HeightRequest="17"
+                   Grid.Row="0">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Command="{Binding BackCommand}">
+                    </TapGestureRecognizer>
+                </Image.GestureRecognizers>
+            </Image>
+            <StackLayout Grid.Row="1"
+                         Margin="0,100,0,0"
+                         HorizontalOptions="Center"
+                         VerticalOptions="Center">
+
+                <StackLayout IsVisible="{Binding IsLeader}"
+                    Orientation="Horizontal"
+                    HorizontalOptions="Center">
+                    <Image Source="Icon_crown.png"
+                        WidthRequest="15"/>
+                    <Frame Padding="5,1"
+                        HasShadow="False"
+                        CornerRadius="8"
+                        BackgroundColor="Orange">
+                        <Label Text="모임장"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="12"
+                            TextColor="White"
+                            HorizontalOptions="Center"/>
+                    </Frame>
+                </StackLayout>
+
+                <ffimageloading:CachedImage
+                    Margin="0,10,0,0"
+                    Source="{Binding UserImage}"                    
+                    HeightRequest="125"
+                    WidthRequest="125"
+                    ErrorPlaceholder="Icon_profile.png"
+                    LoadingPlaceholder="Icon_profile.png">
+                    <ffimageloading:CachedImage.Transformations>
+                        <fftransformations:CircleTransformation/>
+                    </ffimageloading:CachedImage.Transformations>
+
+                    <ffimageloading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer
+                        Command="{Binding ImageTabCommand}">
+                        </TapGestureRecognizer>
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
+                
+                <Label Text="{Binding UserName}"
+                       Margin="0,10,0,0"
+                       Style="{DynamicResource ListItemTextStyle}" 
+                       FontSize="22"
+                       HorizontalOptions="Center"/>
+
+                <Frame Margin="0,5"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="Center"
+                    HeightRequest="30"
+                    WidthRequest="120"
+                    HasShadow="False"
+                    CornerRadius="20"
+                    Padding="0"
+                    BackgroundColor="#f0f0f0">
+                    <Label Text="{Binding UserPhone}"
+                        Style="{DynamicResource ListItemTextStyle}" 
+                        FontSize="14"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+                </Frame>
+
+                <Label Text="{Binding UserEtc}"
+                       HorizontalTextAlignment="Center"
+                       HeightRequest="100"
+                       Margin="50,5,50,0"
+                       LineBreakMode="WordWrap"
+                       Style="{DynamicResource ListItemTextStyle}" 
+                       FontSize="14"
+                       TextColor="{StaticResource GrayLabel}"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+            <StackLayout
+                IsVisible="{Binding IsOtherInfo}"
+                Grid.Row="2"                
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                Spacing="20">
+                <StackLayout>
+                    <ImageButton
+                        Source="Icon_call.png"
+                        Padding="17.5"
+                        CornerRadius="35"
+                        HeightRequest="70"
+                        WidthRequest="70"
+                        BackgroundColor="#ffffff"
+                        BorderWidth="1"
+                        BorderColor="#f0f0f0"
+                        Command="{Binding CallCommand}"/>
+                    <Label Margin="0,5,0,0"
+                           HorizontalOptions="Center"
+                           Text="전화걸기"
+                           Style="{DynamicResource ListItemTextStyle}"
+                           FontSize="12"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+                <StackLayout>
+                    <ImageButton
+                        Source="Icon_SMS.png"
+                        Padding="15"         
+                        CornerRadius="35"
+                        HeightRequest="70"
+                        WidthRequest="70"
+                        BackgroundColor="#ffffff"
+                        BorderWidth="1"
+                        BorderColor="#f0f0f0"
+                        Command="{Binding SendSMSCommand}"/>
+                    <Label Margin="0,5,0,0"
+                           HorizontalOptions="Center"
+                           Text="문자보내기"
+                           Style="{DynamicResource ListItemTextStyle}"
+                           FontSize="12"/>
+                </StackLayout>
+                <StackLayout>
+                    <ImageButton
+                        Source="Icon_contact.png"
+                        Padding="19"
+                        CornerRadius="35"
+                        HeightRequest="70"
+                        WidthRequest="70"
+                        BackgroundColor="#ffffff"
+                        BorderWidth="1"
+                        BorderColor="#f0f0f0"
+                        Command="{Binding SavePhoneCommand}"/>
+                    <Label Margin="0,5,0,0"
+                           HorizontalOptions="Center"
+                           Text="연락처 저장"
+                           Style="{DynamicResource ListItemTextStyle}"
+                           FontSize="12"/>
+                </StackLayout>
+                <StackLayout>
+                    <ImageButton
+                        Source="Icon_chat.png"
+                        Padding="17"
+                        CornerRadius="35"
+                        HeightRequest="70"
+                        WidthRequest="70"
+                        BackgroundColor="#ffffff"
+                        BorderWidth="1"
+                        BorderColor="#f0f0f0"
+                        Command="{Binding StartChatCommand}"/>
+                    <Label Margin="0,5,0,0"
+                           HorizontalOptions="Center"
+                           Text="1:1 대화"
+                           Style="{DynamicResource ListItemTextStyle}"
+                           FontSize="12"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout
+                IsVisible="{Binding IsMyInfo}"
+                Grid.Row="2"
+                HorizontalOptions="Center"
+                Orientation="Horizontal"
+                Spacing="20">
+                <StackLayout>
+                    <ImageButton
+                        Source="Icon_set_profile.png"
+                        Padding="18"
+                        CornerRadius="35"
+                        HeightRequest="70"
+                        WidthRequest="70"
+                        BackgroundColor="#ffffff"
+                        BorderWidth="1"
+                        BorderColor="#f0f0f0"
+                        Command="{Binding MyInfoCommand}"/>
+                    <Label Margin="0,5,0,0"
+                           HorizontalOptions="Center"
+                           Text="프로필 설정"
+                           Style="{DynamicResource ListItemTextStyle}"
+                           FontSize="12"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+                <StackLayout>
+                    <ImageButton
+                        Source="Icon_write.png"
+                        Padding="18"         
+                        CornerRadius="35"
+                        HeightRequest="70"
+                        WidthRequest="70"
+                        BackgroundColor="#ffffff"
+                        BorderWidth="1"
+                        BorderColor="#f0f0f0"
+                        Command="{Binding MyWriteCommand}"/>
+                    <Label Margin="0,5,0,0"
+                           HorizontalOptions="Center"
+                           Text="작성글 보기"
+                           Style="{DynamicResource ListItemTextStyle}"
+                           FontSize="12"
+                           FontAttributes="Bold"/>
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

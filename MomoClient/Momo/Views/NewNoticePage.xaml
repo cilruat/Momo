@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.NewNoticePage"
+             xmlns:controls="clr-namespace:Momo.Controls;assembly=Momo"
+             xmlns:model="clr-namespace:Momo.Models"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Padding="15">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="Icon_close.png"
+                       HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <StackLayout Margin="15,0" Spacing="0">
+                    <Label Text="{Binding PageTitle}"
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="14"
+                           FontAttributes="Bold"/>
+                    <Label Text="{Binding GroupName}"
+                           Style="{DynamicResource ListItemTextStyle}" 
+                           FontSize="12"/>
+                </StackLayout>
+                <Label HorizontalOptions="EndAndExpand"
+                    VerticalOptions="Center"
+                    Text="완료"
+                    TextColor="{StaticResource Orange}"
+                    Style="{DynamicResource ListItemTextStyle}" 
+                    FontSize="15">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding ConfirmCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            
+            <BoxView HorizontalOptions="FillAndExpand"
+                Margin="-15,0,-15,0"
+                HeightRequest="1"
+                Color="LightGray"/>
+
+            <ScrollView VerticalScrollBarVisibility="Never"
+                    VerticalOptions="Start">
+                <StackLayout Spacing="10">
+                    <Editor x:Name="NewNoticeEditor"
+                        Text="{Binding NewNotice}"
+                        Placeholder="여기를 눌러 새로운 글을 작성해보세요"
+                        FontSize="14"
+                        AutoSize="TextChanges"/>
+
+                    <StackLayout BindableLayout.ItemsSource="{Binding Media}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BorderColor="{Binding ChangeColor}"
+                                       Padding="1">
+                                    <StackLayout x:DataType="model:MediaFile">
+                                        <ffimageloading:CachedImage
+                                            HeightRequest="280"
+                                            DownsampleToViewSize="True"
+                                            Source="{Binding Path}"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand">
+                                        </ffimageloading:CachedImage>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding MediaTapCommand}">
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout VerticalOptions="EndAndExpand"
+                Margin="0,-5">
+                <BoxView HorizontalOptions="FillAndExpand"
+                     Margin="-10,0,-10,3"
+                     HeightRequest="0.5"
+                     Color="Black"/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Horizontal"
+                        Grid.Column="0">
+                        <Image Source="Icon_Picture.png"/>
+                        <Label Text="사진 첨부"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="13"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding AttachPictureCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                    <!--<StackLayout Orientation="Horizontal"
+                        Grid.Column="1">
+                        <Image Source="Icon_Map.png"/>
+                        <Label Text="지도 첨부"
+                            TextColor="Black"
+                            VerticalTextAlignment="Center"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="13"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding AttachMapCommand}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>-->
+                </Grid>
+            </StackLayout>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding TouchCommand}">
+                </TapGestureRecognizer>
+            </StackLayout.GestureRecognizers>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

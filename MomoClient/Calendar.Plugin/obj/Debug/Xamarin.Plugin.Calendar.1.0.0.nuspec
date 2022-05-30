@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Xamarin.Plugin.Calendar</id>
+    <version>1.0.0</version>
+    <authors>Josip Caleta</authors>
+    <owners>Josip Caleta</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <projectUrl>https://github.com/lilcodelab/XamarinForms-Calendar</projectUrl>
+    <description>Customized calendar plugin for Xamarin.Forms</description>
+    <copyright>Copyright 2020 lilcodelab</copyright>
+    <tags>events calendar, calendar, xamarin forms, custom calendar</tags>
+    <repository type="git" url="https://github.com/lilcodelab/XamarinForms-Calendar" />
+    <dependencies>
+      <group targetFramework="MonoAndroid8.1">
+        <dependency id="Xamarin.Forms" version="3.3.0.912540" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="Xamarin.iOS1.0">
+        <dependency id="Xamarin.Forms" version="3.3.0.912540" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Xamarin.Forms" version="3.3.0.912540" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="Java.Interop" targetFramework="MonoAndroid8.1" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Debug\netstandard2.0\Xamarin.Plugin.Calendar.dll" target="lib\netstandard2.0\Xamarin.Plugin.Calendar.dll" />
+    <file src="C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Debug\netstandard2.0\Xamarin.Plugin.Calendar.xml" target="lib\netstandard2.0\Xamarin.Plugin.Calendar.xml" />
+    <file src="C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Debug\monoandroid81\Xamarin.Plugin.Calendar.dll" target="lib\monoandroid81\Xamarin.Plugin.Calendar.dll" />
+    <file src="C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Debug\monoandroid81\Xamarin.Plugin.Calendar.xml" target="lib\monoandroid81\Xamarin.Plugin.Calendar.xml" />
+    <file src="C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Debug\xamarin.ios10\Xamarin.Plugin.Calendar.dll" target="lib\xamarinios10\Xamarin.Plugin.Calendar.dll" />
+    <file src="C:\Proejct_Momo\Momo\Calendar.Plugin\bin\Debug\xamarin.ios10\Xamarin.Plugin.Calendar.xml" target="lib\xamarinios10\Xamarin.Plugin.Calendar.xml" />
+  </files>
+</package>

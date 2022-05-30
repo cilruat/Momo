@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.JoinPage"
+             Title="회원 가입">
+    <ContentPage.Content>
+        <Grid Margin="16" VerticalOptions="CenterAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout Grid.Row="0">
+                <Entry x:Name="UserPhoneEntry"
+                       Text="{Binding UserPhone}"
+                       Placeholder="휴대폰 번호"
+                       Keyboard="Numeric"
+                       MaxLength="11"
+                       FontSize="16"/>
+                <Entry x:Name="PasswordEntry"
+                       Text="{Binding Password}"
+                       Placeholder="비밀번호"
+                       IsPassword="True"
+                       FontSize="16"/>
+                <Entry x:Name="UserNameEntry"
+                       Text="{Binding UserName}"
+                       Placeholder="이름"
+                       FontSize="16"/>
+                <Entry x:Name="BirthDayEntry"
+                       Text="{Binding BirthDay}"
+                       Placeholder="생년월일 (예: 20001212)"
+                       Keyboard="Numeric"
+                       MaxLength="8"
+                       FontSize="16"/>
+                <Label Text="이미 존재하는 회원입니다" 
+                       IsVisible="{Binding AreJoinInvalid}" 
+                       TextColor="Red" />
+            </StackLayout>
+            <Button Grid.Row="6"
+                    Text="확인"
+                    Command="{Binding JoinCommand}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

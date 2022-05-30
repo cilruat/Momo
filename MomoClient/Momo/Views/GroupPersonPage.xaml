@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.GroupPersonPage"
+             xmlns:local="clr-namespace:Momo.ViewModels" 
+             xmlns:model="clr-namespace:Momo.Models"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:controls="clr-namespace:Momo.Controls;assembly=Momo"
+             x:Name="BrowseItemsPage"
+             Title="{Binding Title}"
+             BackgroundColor="White">
+    
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem IconImageSource="Icon_plus.png" Command="{Binding AddPersonCommand}"/>-->
+        <ToolbarItem IconImageSource="Icon_option.png" Command="{Binding MultiSelectCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="10,5">
+                <Frame Margin="0,5"
+                    Padding="4"
+                    CornerRadius="5"
+                    BorderColor="Transparent"
+                    BackgroundColor="#f0f0f0">
+                    <SearchBar x:Name="search"
+                        Margin="-10,-5,0,-5"
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="검색"
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        Text="{Binding SearchText}"
+                        TextChanged="search_TextChanged">
+                    </SearchBar>
+                </Frame>
+            </StackLayout>
+
+            <RefreshView Margin="0" x:DataType="local:GroupPersonViewModel" Command="{Binding LoadPersonsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView x:Name="GroupPersonViewModel"
+                    ItemsSource="{Binding Persons}"
+                    SelectionMode="None">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="0,0.5">
+                                <Frame Margin="-5,0"
+                                       Padding="10"
+                                       HasShadow="True">
+                                    <Grid x:DataType="model:Person">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <ffimageloading:CachedImage
+                                            Source="{Binding PersonImage}"
+                                            HeightRequest="50"
+                                            WidthRequest="50"
+                                            LoadingPlaceholder="Icon_profile.png"
+                                            ErrorPlaceholder="Icon_profile.png"
+                                            Grid.Column="1">
+                                            <ffimageloading:CachedImage.Transformations>
+                                                <fftransformations:CircleTransformation/>
+                                            </ffimageloading:CachedImage.Transformations>
+                                        </ffimageloading:CachedImage>
+                                        <StackLayout Grid.Column="2"
+                                            VerticalOptions="CenterAndExpand"
+                                            Spacing="0">
+                                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                                <Label Margin="5,0,0,0"
+                                                    Text="{Binding PersonName}"
+                                                    Style="{DynamicResource ListItemTextStyle}" 
+                                                    FontSize="15"/>
+                                                <StackLayout IsVisible="{Binding Leader}"
+                                                    VerticalOptions="Center"
+                                                    Orientation="Horizontal"
+                                                    Spacing="3">
+                                                    <Image Source="Icon_crown.png"
+                                                       HeightRequest="12"/>
+                                                    <Frame Padding="4,0.5"
+                                                        HasShadow="False"
+                                                        CornerRadius="8"
+                                                        BackgroundColor="Orange">
+                                                        <Label Text="모임장"
+                                                            Style="{DynamicResource ListItemTextStyle}" 
+                                                            FontSize="10"
+                                                            TextColor="White"
+                                                            HorizontalOptions="Center"/>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </StackLayout>
+                                            <Label Margin="5,0,0,0"
+                                                Text="{Binding PhoneNum}"
+                                                Style="{DynamicResource ListItemTextStyle}"                                       
+                                                FontSize="13"
+                                                TextColor="{StaticResource GrayLabel}"/>
+                                        </StackLayout>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                NumberOfTapsRequired="1"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:GroupPersonViewModel}}, Path=PersonTapped}"
+                                                CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+     </ContentPage.Content>
+</ContentPage>

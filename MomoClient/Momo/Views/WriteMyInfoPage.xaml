@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.WriteMyInfoPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:controls="clr-namespace:Momo.Controls;assembly=Momo"
+             BackgroundColor="#fff"
+             Title="프로필 작성">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Padding="15">
+            <StackLayout Margin="0,50"
+                VerticalOptions="StartAndExpand">
+                <StackLayout>
+                    <ffimageloading:CachedImage
+                        x:Name="MyImage"
+                        Source="{Binding MyImage}"
+                        HeightRequest="115"
+                        WidthRequest="115"
+                        ErrorPlaceholder="Icon_profile.png"
+                        LoadingPlaceholder="Icon_profile.png">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation/>
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                    <Image Margin="90,-40,0,0"
+                        Source="Icon_camera.png"
+                        HeightRequest="30"
+                        WidthRequest="30"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SelectImage}">
+                        </TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout Spacing="20"
+                    Margin="22.5,70,22.5,20">
+                    <StackLayout Spacing="-2">
+                        <Label Text="이름"
+                            LineBreakMode="WordWrap"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="13"
+                            FontAttributes="Bold"/>
+                        <controls:StandardEntry
+                            Padding="0"
+                            BorderColor="Transparent"
+                            HeightRequest="40"
+                            Text="{Binding MyName}"
+                            TextColor="Black"
+                            Placeholder="이름 입력"
+                            FontSize="24"/>
+                    </StackLayout>
+
+                    <BoxView Margin="0,-20,0,-10"
+                        Opacity="0.5"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        Color="LightGray"/>
+
+                    <StackLayout Spacing="-2">
+                        <Label Text="기타 소개사항 (최대 40자)"
+                            LineBreakMode="WordWrap"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="13"
+                            FontAttributes="Bold"/>
+                        <Editor Margin="-5"
+                            HeightRequest="120"
+                            MaxLength="40"
+                            Text="{Binding MyEtc}"
+                            TextColor="Black"
+                            Placeholder="소개글 작성"
+                            FontSize="24">
+                        </Editor>
+                    </StackLayout>
+                </StackLayout>
+
+                <Button VerticalOptions="EndAndExpand"
+                    Margin="20,0"
+                    Text="저장"
+                    FontSize="15"                    
+                    Command="{Binding SaveCommand}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

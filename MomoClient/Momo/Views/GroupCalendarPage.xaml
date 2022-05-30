@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:plugin="clr-namespace:Xamarin.Plugin.Calendar.Controls;assembly=Xamarin.Plugin.Calendar"
+             xmlns:controls="clr-namespace:Momo.Controls"
+             x:Class="Momo.Views.GroupCalendarPage"
+             x:Name="CalendarPage"
+             BackgroundColor="White"
+             Title="일정">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="Icon_plus.png" Command="{Binding AddScheduleCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout
+        Margin="10,0"
+        VerticalOptions="FillAndExpand"
+        HorizontalOptions="FillAndExpand">
+        <plugin:Calendar
+            Culture="{Binding Culture}"
+            Events="{Binding Events}"
+            BackgroundColor="White"
+            YearLabelColor="Orange"
+            MonthLabelColor="Orange"
+            MonthYear="{Binding MonthYear}"
+            SelectedDate="{Binding SelectedDate}"
+            SelectedDateColor="Orange"
+            SelectedDateTextFormat="yyyy년 MMM dd일 ddd요일"
+            SelectedDayBackgroundColor="Orange"
+            EventIndicatorColor="Orange"
+            EventIndicatorSelectedColor="White"
+            EventIndicatorSelectedTextColor="White"
+            DayViewSize="35"
+            TodayFillColor="LightGray"
+            TodayOutlineColor="LightGray"
+            DaysTitleColor="Orange"
+            DaysTitleMaximumLength="OneChar">
+
+            <plugin:Calendar.HeaderSectionTemplate>
+                <controls:CalendarHeader />
+            </plugin:Calendar.HeaderSectionTemplate>
+
+            <plugin:Calendar.FooterSectionTemplate>
+                <DataTemplate>
+                    <controls:CalendarFooter />
+                </DataTemplate>
+            </plugin:Calendar.FooterSectionTemplate>
+
+            <plugin:Calendar.EventTemplate>
+                <DataTemplate>
+                    <StackLayout
+                        Padding="10,15,10,0"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        <Grid ColumnSpacing="30">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="35"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- Only Start, Only End -->
+                            <StackLayout Grid.Column="0"
+                                Spacing="-5"
+                                Padding="0"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding Type1}">
+                                <Label Text="{Binding TypeEtc1}"
+                                    Margin="0,0,0,7.5"
+                                    FontSize="11"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                                <Label Text="{Binding FormatTT}"
+                                    FontSize="17"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                                <Label Text="{Binding Time}"
+                                    FontSize="12"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                            </StackLayout>
+
+                            <!-- All Day -->
+                            <StackLayout Grid.Column="0"
+                                Spacing="0"
+                                Padding="0"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding Type2}">
+                                <Label Text="하루"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                                <Label Text="종일"
+                                    FontSize="16"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                            </StackLayout>
+
+                            <!-- Start and End of the day -->
+                            <StackLayout Grid.Column="0"
+                                Spacing="-2.5"
+                                Padding="0"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding Type3}">
+                                <Label Text="{Binding TypeEtc1}"
+                                    FontSize="12"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                                <Label Text="~"
+                                    FontSize="8"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                                <Label Text="{Binding TypeEtc2}"
+                                    FontSize="12"
+                                    FontAttributes="Bold"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1"
+                                         VerticalOptions="Center">
+                                <Label Text="{Binding Title}" 
+                                    FontSize="17"
+                                    VerticalTextAlignment="Center"/>
+                                <Label Text="{Binding Desc}" 
+                                    Margin=".5,0"
+                                    FontSize="12"
+                                    TextColor="Gray"
+                                    VerticalTextAlignment="Center"
+                                    LineBreakMode="TailTruncation"/>
+                            </StackLayout>
+                        </Grid>
+
+                        <BoxView Margin="-15,10,0,0"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="0.5"
+                            Color="LightGray"/>
+                        
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding BindingContext.EventSelectedCommand, Source={x:Reference CalendarPage}}"
+                                CommandParameter="{Binding .}" />
+                        </StackLayout.GestureRecognizers>
+                    </StackLayout>
+                </DataTemplate>
+            </plugin:Calendar.EventTemplate>
+
+            <plugin:Calendar.EmptyTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="일정이 없습니다"
+                            TextColor="Gray"
+                            FontSize="15"
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            Margin="0,30"/>
+                    </StackLayout>
+                </DataTemplate>
+            </plugin:Calendar.EmptyTemplate>
+        </plugin:Calendar>
+    </StackLayout>
+</ContentPage>

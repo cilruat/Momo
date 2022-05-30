@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.GroupImagesPage"
+             xmlns:local="clr-namespace:Momo.ViewModels" 
+             xmlns:model="clr-namespace:Momo.Models"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="#f0f0f0"
+             Title="사진첩">
+
+    <ContentPage.ToolbarItems>
+        <!--<ToolbarItem Text="취소" IconImageSource="{Binding IconOption}" Command="{Binding OptionCommand}"/>-->
+        <ToolbarItem IconImageSource="Icon_option.png" Command="{Binding OptionCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Label VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Text="공유된 사진이 없습니다"
+                Style="{DynamicResource ListItemTextStyle}"
+                FontSize="14"
+                IsVisible="{Binding IsEmptyList}"/>
+
+            <RefreshView Margin="3" x:DataType="local:GroupImagesViewModel"
+                Command="{Binding LoadImagesCommand}"
+                IsRefreshing="{Binding IsBusy, Mode=TwoWay}"
+                IsVisible="{Binding IsImageList}">
+                <CollectionView x:Name="GroupImagesViewModel"
+                    ItemsSource="{Binding Images}"
+                    SelectionMode="None">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout 
+                            Orientation="Vertical"
+                            Span="3"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="3">
+                                <Frame CornerRadius="2.5" 
+                                    Padding="0">
+                                    <StackLayout 
+                                        x:DataType="model:MediaFile"
+                                        HeightRequest="140">
+                                        <ffimageloading:CachedImage
+                                            DownsampleToViewSize="true"
+                                            HeightRequest="140"
+                                            Aspect="AspectFill"
+                                            Source="{Binding Path}"/>
+
+                                        <!--<Image Source="{Binding ChangeImage}"
+                                            IsVisible="{Binding IsVisibleCheck}"
+                                            Opacity="0.6"
+                                            HorizontalOptions="Start"
+                                            Margin="5,-140,0,0"
+                                            HeightRequest="25"
+                                            WidthRequest="25"/>-->
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                NumberOfTapsRequired="1"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:GroupImagesViewModel}}, Path=ImageTapped}"
+                                                CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

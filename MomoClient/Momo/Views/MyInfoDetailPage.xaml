@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.MyInfoDetailPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:controls="clr-namespace:Momo.Controls;assembly=Momo"
+             BackgroundColor="#fff"
+             Title="내 정보">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" Padding="15">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="Icon_close.png"
+                    HeightRequest="17">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding BackCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Image.GestureRecognizers>
+                </Image>
+                <Label Margin="15,0,0,0"
+                       Text="내 정보"
+                       Style="{DynamicResource ListItemTextStyle}" 
+                       FontSize="18"
+                       />
+                <Label HorizontalOptions="EndAndExpand"
+                    VerticalOptions="CenterAndExpand"
+                    Text="저장"
+                    TextColor="{StaticResource Orange}"
+                    Style="{DynamicResource ListItemTextStyle}"
+                    FontSize="15">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SaveCommand}"
+                            CommandParameter="">
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+
+            <BoxView Margin="-15,10"
+                HorizontalOptions="FillAndExpand"
+                HeightRequest="0.5"
+                Color="LightGray"/>
+
+            <StackLayout VerticalOptions="CenterAndExpand" Spacing="80">
+                <StackLayout>
+                    <ffimageloading:CachedImage
+                        x:Name="MyImage"
+                        Source="{Binding MyImage}"
+                        HeightRequest="125"
+                        WidthRequest="125"
+                        ErrorPlaceholder="Icon_profile.png"
+                        LoadingPlaceholder="Icon_profile.png">
+                        <ffimageloading:CachedImage.Transformations>
+                            <fftransformations:CircleTransformation/>
+                        </ffimageloading:CachedImage.Transformations>
+                    </ffimageloading:CachedImage>
+                    <Image Margin="90,-40,0,0"
+                       Source="Icon_camera.png"
+                       HeightRequest="30"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding SelectImage}">
+                        </TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
+
+                <StackLayout Spacing="20" Margin="10,0">
+                    <StackLayout>
+                        <Label Text="구글 계정"
+                            LineBreakMode="WordWrap"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            TextColor="{StaticResource GrayLabel}"
+                            FontSize="13"
+                            FontAttributes="Bold"/>
+                        <Label Text="{Binding MyGoogleEmail}"
+                            TextColor="#999"
+                            FontSize="18"
+                            HeightRequest="35"/>
+                    </StackLayout>
+
+                    <BoxView Margin="0,-20,0,-10"
+                        Opacity="0.5"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        Color="LightGray"/>
+
+                    <StackLayout>
+                        <Label Text="전화번호"
+                            LineBreakMode="WordWrap"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            TextColor="{StaticResource GrayLabel}"
+                            FontSize="13"
+                            FontAttributes="Bold"/>
+                        <Label Text="{Binding MyPhone}"
+                            TextColor="#999"
+                            FontSize="18"
+                            HeightRequest="35"/>
+                    </StackLayout>
+
+                    <BoxView Margin="0,-20,0,-10"
+                        Opacity="0.5"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        Color="LightGray"/>
+
+                    <StackLayout Spacing="-2">
+                        <Label Text="이름"
+                            LineBreakMode="WordWrap"
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            TextColor="{StaticResource GrayLabel}"
+                            FontSize="13"
+                            FontAttributes="Bold"/>
+                        <controls:StandardEntry
+                            Padding="0"
+                            BorderColor="Transparent"
+                            HeightRequest="40"
+                            Text="{Binding ChangeName}"
+                            TextColor="Black"
+                            Placeholder="{Binding MyName}"
+                            PlaceholderColor="Black"
+                            FontSize="16"/>
+                    </StackLayout>
+
+                    <BoxView Margin="0,-20,0,-10"
+                        Opacity="0.5"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        Color="LightGray"/>
+
+                    <StackLayout Spacing="-2">
+                        <Label Text="기타 소개사항 (최대 40자)"
+                            LineBreakMode="WordWrap"
+                            Style="{DynamicResource ListItemTextStyle}"
+                            TextColor="{StaticResource GrayLabel}"
+                            FontSize="13"
+                            FontAttributes="Bold"/>
+                        <Editor Margin="-5"
+                            HeightRequest="80"
+                            MaxLength="40"
+                            Text="{Binding ChangeEtc}"
+                            TextColor="Black"
+                            Placeholder="{Binding MyEtc}"
+                            PlaceholderColor="Black"
+                            FontSize="16">
+                        </Editor>
+                    </StackLayout>
+                </StackLayout>
+
+                <Button VerticalOptions="EndAndExpand"
+                    Text="저장"
+                    FontSize="15"                    
+                    Command="{Binding SaveCommand}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

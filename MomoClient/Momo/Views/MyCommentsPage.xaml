@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Momo.Views.MyCommentsPage"
+             xmlns:local="clr-namespace:Momo.ViewModels" 
+             xmlns:model="clr-namespace:Momo.Models"
+             x:Name="BrowseItemsPage"
+             BackgroundColor="#f0f0f0">
+
+    <ContentView.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView
+                VerticalScrollBarVisibility="Never"
+                Margin="0,-2.5,0,0"
+                x:DataType="local:MyCommentsViewModel">
+                <CollectionView x:Name="MyCommentsViewModel"
+                    ItemsSource="{Binding Comments}"
+                    SelectionMode="None"
+                    RemainingItemsThreshold="{Binding LoadThreshold}"
+                    RemainingItemsThresholdReachedCommand="{Binding LoadBottomCommand}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="0,5">
+                                <Frame Padding="10,10" HasShadow="False">
+                                    <StackLayout x:DataType="model:Comment">
+                                        <Label Text="{Binding GroupName}"
+                                            LineBreakMode="NoWrap" 
+                                            Style="{DynamicResource ListItemTextStyle}" 
+                                            FontSize="13" 
+                                            FontAttributes="Bold">
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    NumberOfTapsRequired="1"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type local:TapNoticesViewModel}}, Path=NoticeGroupTapped}"
+                                                    CommandParameter="{Binding .}">
+                                                </TapGestureRecognizer>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+
+                                        <BoxView HorizontalOptions="FillAndExpand"
+                                                 Margin="-5,0"
+                                            HeightRequest="1"
+                                            Color="LightGray"/>
+
+                                        <StackLayout Padding="5,10,0,0">
+                                            <Label Text="{Binding PersonName}"
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14"
+                                                FontAttributes="Bold"/>
+                                            <Label Text="{Binding Desc}"
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="14"
+                                                LineHeight="1.2" />
+                                            <Label Margin="0,5,0,0"
+                                                Text="{Binding NoticeDesc}"
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"
+                                                TextColor="Gray"
+                                                FontSize="12"/>
+                                            <Label Text="{Binding Time}"
+                                                TextColor="Gray"
+                                                Style="{DynamicResource ListItemTextStyle}" 
+                                                FontSize="12" />
+                                        </StackLayout>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                NumberOfTapsRequired="1"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:TapNoticesViewModel}}, Path=NoticeTapped}"
+                                                CommandParameter="{Binding .}">
+                                            </TapGestureRecognizer>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </Frame>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </ScrollView>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
